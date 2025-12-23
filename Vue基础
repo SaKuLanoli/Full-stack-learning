@@ -1,15 +1,17 @@
-//Vue简介
+//一、Vue简介
 特点：1.是一个JavaScript框架
       2.简化Dome操作
       3.响应式数据驱动
 
-//第一个Vue程序
+
+
+
+//二、第一个Vue程序
 ·官方网站：https://cn.vuejs.org/
 步骤：
   1.导入开发版本的Vue.js
   2.创建Vue实例对象，设置el属性和data属性
   3.使用简洁的模板语法把数据渲染到页面上
-
 
 ————————————————————————————————————————————————————
 <!doctype html>
@@ -37,3 +39,140 @@
     </script>
 </body>
 </html>
+
+
+
+
+
+
+//三、el:挂载点
+1.定义 ： 通过Css选择器设置Vue实例管理元素，设置完毕后el命中的元素内部，{{*}}中的*元素就会被data中同名的元素替换
+<div id="app">
+      {{message}}//->Hello Vue!
+</div>
+
+var app = new Vue({
+      el:"app",
+      data:{
+            message:"Hello Vue!"
+            }
+})
+
+
+2.问题：
+·Vue实力的作用范围是什么？
+      el命中的元素内部
+·是否可以使用其他的选择器？
+      可以，除了“id选择器”还可以使用“类选择器”和“标签选择器”，建议使用“id选择器”
+·是否可以设置其他的dom元素？
+      可以，可以设置其他除了"html"和“body”的双标签，建议挂载到“div”标签
+如果在设置body则会出现如下的错误：vue.js:5129 [Vue warn]: Do not mount Vue to <html> or <body> - mount to normal elements instead.（不要把Vue挂载到html和body上，挂载到其他普通标签上）
+
+——————————————————————————————————————————————————————————————————
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>el：挂载点</title>
+</head>
+<body id="body">
+<!--    Vue实力的作用范围是什么？-->
+<!--    el命中的元素内部-->
+    {{message}}
+
+    <div id="app" class="app">
+        {{message}}
+        <span>{{message}}</span>
+    </div>
+
+<!--    <p id="app" class="app">-->
+<!--        {{message}}-->
+<!--        <span>{{message}}</span>-->
+<!--    </p>-->
+<!--    <h2 id="app" class="app">-->
+<!--        {{message}}-->
+<!--        <span>{{message}}</span>-->
+<!--    </h2>-->
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script>
+        var app = new Vue({
+            el:"#app",          //id选择器（推荐）
+            //el:".app",         //类选择器
+            //el:"div",               //标签选择器
+            el:"#body",
+            data:{
+                message:"Hello Vue!"
+            }
+        })
+    </script>
+</body>
+</html>
+
+
+
+
+
+
+//四、data:数据对象
+·Vue中用到的数据定义在data中
+·data中可以写复杂类型的数据
+·渲染复杂类型数据时，遵守js语法即可
+
+<div id="app">
+      {{message}}//->Hello Vue!
+</div>
+
+var app = new Vue({
+      el:"app",
+      data:{
+            message:"Hello Vue!"
+            array:[],
+            obj:{},
+            }
+})
+_______________________________________________________________________________
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>data数据对象</title>
+</head>
+<body>
+    <div id="app">
+        {{message}}
+        <h2> {{school.name}} {{school.mobile}} </h2>
+        <ul>
+            <li>{{campus[0]}}</li>
+            <li>{{campus[1]}}</li>
+        </ul>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script>
+        var app = new Vue({
+            el:"#app",
+            data:{
+                message:"Hello Vue!",
+                school:{
+                    name:"黑马程序员",
+                    mobile:"123-123-1234"
+                },
+                campus:["北京","上海"]
+            }
+        })
+    </script>
+</body>
+</html>
+
+
+
+
+
+
+
+
