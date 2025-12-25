@@ -1,0 +1,74 @@
+1.作用
+为元素绑定事件
+·常见事件：click（鼠标点击），monseenter（鼠标移入），dblclick（鼠标双击）
+
+<div id="app">
+    <input type="button"value="事件绑定"v-on:事件名="方法">
+    <input type="button"value="事件绑定" @事件名="方法">//简写：用@代替 “ v-on: ”
+
+    <input type="button"value="事件绑定"v-on:click="doIt">
+    <input type="button"value="事件绑定"v-on:mounseenter="doIt">
+    <input type="button"value="事件绑定"v-on:dblclick="doIt">
+</div>
+
+var app = new Vue({
+      el:"#app",
+      data:{
+      },
+      methods:{
+          doIt:function (){
+          //逻辑
+          }
+      }
+})
+
+2.重点内容
+·v-on指令的作用是：为元素绑定事件
+·事件名不需要写on
+·指令可以简写为@
+·绑定的方法定义在menthods属性中
+·方法内部通过 "this" 关键字可以访问定义在"data"中的数据
+
+
+
+
+——————————————————————————————————————————————————————————————————————————————————————————
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>v-on指令基础</title>
+</head>
+<body>
+    <div id="app">
+        <input type="button" value="v-on指令 的单击事件" v-on:click="doIt">
+        <input type="button" value="v-on简写" @click="doIt">
+        <input type="button" value="v-on指令 的双击事件" @dblclick="doIt">
+
+        <h2 @click="changeFood">{{food}}</h2>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script>
+        var app = new Vue({
+            el:"#app",
+            data:{
+                food:"西红柿炒蛋"
+            },
+            methods:{
+              doIt:function (){
+                  //逻辑
+                  alert("做IT");
+              },
+              changeFood:function (){
+              //    console.log(this.food);
+                  this.food+="好好吃！"
+              }
+            }
+        })
+    </script>
+
+</body>
+</html>
