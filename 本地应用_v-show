@@ -1,0 +1,79 @@
+1. 定义
+根据表达值的真假，切换元素的显示和隐藏
+<div id="app">
+    <img src="地址" v-show="true">
+    <img src="地址" v-show="isShow">
+    <img src="地址" v-show="age>=18">
+</div>
+    
+<script>
+    var app = new Vue({
+        el:"#app",
+         data:{
+             isShow:true,//true显示 false隐藏
+            age:16
+        }
+    })
+</script>
+
+2.特点
+·v-show指令的作用是：更具表达值的真假，切换元素的显示和隐藏
+·原理是修改元素的display，实现显示和隐藏
+·指令后面的内容，最终都会解析为布尔值
+·如果值为true元素显示，值为false元素隐藏
+·数据改变之后，元素对应的显示状态会同步更新
+
+
+
+
+——————————————————————————————————————————————————————————————————————————————————
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>v-show指令</title>
+</head>
+<body>
+    <div id="app">
+        <img src="地址" v-show="true">
+        <img src="地址" v-show="false">
+        <br>
+
+        <input type="button" value="切换显示状态" @click="changeIsShow">
+        <img src="地址" v-show="isShow">
+        <br>
+
+        <button @click="sub">-</button>
+        <span>{{age}}</span>
+        <img src="地址" v-show="age>=18">
+        <button @click="add">+</button>
+    </div>
+    
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    
+    <script>
+        var app = new Vue({
+            el:"#app",
+            data:{
+                isShow:false,//true显示 false隐藏
+                age:16
+            },
+            methods:{
+                changeIsShow:function (){
+                    this.isShow =! this.isShow;
+                },
+                add:function (){
+                    this.age++;
+                },
+                sub:function (){
+                    this.age--;
+                }
+            }
+
+        })
+    </script>
+</body>
+</html>
