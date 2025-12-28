@@ -1,0 +1,86 @@
+1，框架
+·data中定义数据：比如num
+·methods中添加两个方法：比如add（递增），sub（递减）
+·使用v-text将num设置给span标签
+·使用v-on将“sub”和“add”绑给+,-按钮
+·累加的逻辑：小于10累加，否则提示
+·递减的逻辑：大于0递减，否则提示
+
+<div class="input-num">
+     <button @click="add">+</button>
+          <span>{{}}</span>
+    <button @click="sub">-</button>
+</div>
+
+var app = new Vue({
+      el:"#app",
+      data:{
+        num:1
+      },
+      methods:{
+      add:function(){},
+      sub:function(){}
+      }
+});
+
+2.特点
+·创建Vue示例时：el（挂载点），data（数据），methods（方法）
+·v-on指令的作用是绑定事件，简写为@
+·方法中通过this关键字获取data中的数据
+·v-text指令的作用是；设置元素的文本值，简写为{{ }}
+·v-html指令的作用是，设置元素的innerHtml
+
+
+
+
+————————————————————————————————————————————————————————————————————————————————————————————————
+
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>本地应用_计数器</title>
+</head>
+<body>
+    <div id="app">
+        <div class="input-num">
+            <button @click="sub">-</button>
+            <span>{{num}}</span>
+            <button @click="add">+</button>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+    <script>
+        var app = new Vue({
+            el:"#app",
+            data:{
+                num:1
+            },
+            methods:{
+                add:function (){
+                    //console.log("++")
+                    if(this.num<10){
+                        this.num++;
+                    }
+                    else{
+                        alert("最大啦");
+                    }
+                },
+                sub:function (){
+                    //console.log("--")
+                    if(this.num>0){
+                        this.num--;
+                    }
+                    else{
+                        alert("最小啦");
+                    }
+                }
+            }
+        })
+    </script>
+</body>
+</html>
