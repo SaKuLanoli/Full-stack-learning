@@ -1,0 +1,116 @@
+1.定义
+设置元素的属性
+·常见元素属性：src title class
+语法：v-bind:属性名=表达式
+
+<div id="app">
+      <img v-bind:src="imgSrc" ><br>
+      <img v-bind:title="imaTitle+'!!!'"><br>
+
+      <!--两种改变类名的方法-->
+      三元表达式型：
+      <img v-bind:class="isActive?'active':'' " ><br>
+      对象的写法(active这个类名是否生效，取决于后面isActive的值是false还是true)：
+      <img v-bind:class="{active:isActive}" ><br><br><br>
+
+<!--省略写法-->
+        v-bind可以直接省略
+        <img :src="imgSrc" ><br>
+        <img :title="imaTitle+'!!!'"><br>
+
+        <!--两种改变类名的方法-->
+        三元表达式型：
+        <img :class="isActive?'active':'' " ><br>
+        对象的写法(active这个类名是否生效，取决于后面isActive的值是false还是true)：
+        <img :class="{active:isActive}" >
+</div>
+
+var app = new Vue({
+    el:"#app",
+    data:{
+        imgSrc:"图片地址",
+        imaTitle:"Hello Vue!",
+        isActive:false
+    }
+})
+
+2.重点
+·v-bind指令的作用是：为元素绑定属性
+·完整写法是 “v-bind:属性名”    
+·简写的话可以直接省略v-bind，只保留 “:属性名”
+·需要动态的增删class，建议使用对象的方式
+
+
+
+——————————————————————————————————————————————————————————————————————————————
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>v-bind指令</title>
+
+    <style>
+        img {
+            width:200px;
+            height: 30px; /* 保持宽高比 */
+            max-width: 100%; /* 防止超出容器 */
+        }
+
+        .active{
+            border: 2px solid red;
+        }
+    </style>
+
+</head>
+<body>
+    <div id="app">
+      <img v-bind:src="imgSrc" ><br>
+      <img v-bind:src="imgSrc" title="imaTitle+'!!!'"><br>
+
+      <!--两种改变类名的方法-->
+        <button @click="toggleActive">改变class</button>
+        <br>
+      三元表达式型：
+      <img v-bind:class="isActive?'active':'' " ><br>
+      对象的写法(active这个类名是否生效，取决于后面isActive的值是false还是true)：
+      <img v-bind:class="{active:isActive}" ><br><br><br>
+
+
+
+<!--省略写法-->
+        v-bind可以直接省略
+        <img :src="imgSrc" ><br>
+        <img :src="imgSrc" title="imaTitle+'!!!'"><br>
+
+        <!--两种改变类名的方法-->
+        <button @click="toggleActive">改变class</button>
+        <br>
+        三元表达式型：
+        <img :class="isActive?'active':'' " ><br>
+        对象的写法(active这个类名是否生效，取决于后面isActive的值是false还是true)：
+        <img :class="{active:isActive}" ></div>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+    <script>
+      var app = new Vue({
+        el:"#app",
+        data:{
+           imgSrc:"src/638400002.jpeg",
+           imaTitle:"Hello Vue!",
+           isActive:false
+        },
+        methods:{
+            toggleActive:function (){
+                this.isActive =! this.isActive
+            }
+        }
+      })
+    </script>
+
+
+</body>
+
+</html>
