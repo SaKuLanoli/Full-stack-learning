@@ -1,0 +1,104 @@
+1.定义
+根据数据生成列表结构，或者说v-for的作用就是把作为模板的标签以及它内部的所有内容根据数据的个数拷贝若干份
+也可以通过索引的方式对“对象数组”进行占位和循环
+<div id="app">
+        <ul>
+            <li v-for="item in arr">
+                {{item}}
+            </li>
+            <li v-for="{item,index} in arr" :title="item">
+                {{index}}{{item}}
+            </li>
+            <li v-for="{item,index} in objArr" :title="item">
+                {{item.name}}
+            </li>
+        </ul>
+    </div>
+
+    var app =new Vue({
+            el:"#app",
+            data:{
+                arr:[1,2,3,4,5],
+                objArr:[
+                    {name:"jack"},
+                    {name:"rose"}
+                ]
+            },
+            methods:{
+
+            }
+        })
+
+2.重点:
+·v-for指令的作用：根据数据生成列表结构
+·数组经常和v-for结合使用
+·语法是（item,index）in 数据
+·item 和 index可以结合其他指令一起使用
+·数组长度的更新会同步到页面上，是响应式的
+
+
+
+————————————————————————————————————————————————————————————————————————————————————
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>v-for指令</title>
+</head>
+<body>
+    <div id="app">
+        <ul>
+            <li v-for="item in arr">
+                你好
+            </li>
+        </ul>
+        <ul>
+            <li v-for="item in arr">
+                你好:{{item}}
+            </li>
+        </ul>
+
+        <ul>
+            <li v-for="(item,index) in arr" :title="item">
+                {{index+1}}你好:{{item}}
+            </li>
+        </ul>
+
+        <input type="button" value="添加数据" @click="add">
+        <ul>
+            <li v-for="(item,index) in objArr" :title="item.name">
+                {{item.name}}
+            </li>
+        </ul>
+        <input type="button" value="移除数据" @click="remove">
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+    <script>
+        var app =new Vue({
+            el:"#app",
+            data:{
+                arr:[1,2,3,4,5],
+                objArr:[
+                    {name:"jack"},
+                    {name:"rose"}
+                ]
+            },
+            methods:{
+                add:function (){
+                    this.objArr.push({name:"Lily"});//在数组中添加Lily元素
+                },
+                remove:function (){
+                    this.objArr.shift();//默认移除数组最左边的元素
+                }
+            }
+        })
+    </script>
+</body>
+</html>
+
+        
