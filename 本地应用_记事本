@@ -4,6 +4,243 @@
   2）获取用户输入（v-model）
   3）回车，新增数据(v-on.enter)
 2.删除
+  1）点击删除指定内容（v-on splice索引）
+  ·注意：1>数据改变，和数据绑定的元素同步改变
+         2>事件的自定义参数
+         3>splice方法的作用：splice() 是 JavaScript 数组的的方法，用于添加、删除或替换数组中的元素。
 3.统计
+  1）统计信息个数（v-text length）
 4.清空
+  1)点击清除所有信息（v-on 清除数据）
 5.隐藏
+  1）没有数据时，隐藏元素（v-show v-if 数组非空）
+
+
+二、小结
+·列表结构可以通过v-for指令结合数据生成
+·v-on结合事件修饰符可以对事件进行限制
+·v-on在绑定事件时可以传递自定义参数
+·通过v-model可以快速的设置和获取表单元素的值
+·基于数据的开发方式
+
+
+
+
+————————————————————————————————————————————————————————————————————————————————————————————————————————————————-
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>记事本</title>
+
+    <style>
+        body {
+            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            background: #f5f5f5;
+            margin: 0;
+            padding: 0;
+        }
+
+        #todoapp {
+            background: white;
+            margin: 100px auto 40px;
+            max-width: 550px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        /* 头部样式 */
+        .header h1 {
+            text-align: center;
+            font-size: 60px;
+            color: rgba(175, 47, 47, 0.15);
+            margin: 0;
+            padding: 30px 0;
+        }
+
+        .new-todo {
+            width: 100%;
+            padding: 16px;
+            font-size: 24px;
+            border: none;
+            box-sizing: border-box;
+            border-bottom: 1px solid #ededed;
+            outline: none;
+        }
+
+        /* 在 .new-todo 和 .main 之间添加分隔线 */
+        .main {
+            border-top: 1px solid #ddd;
+            margin-top: 1px;
+        }
+
+        /* Todo 列表样式 */
+        .todo-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .todo {
+            position: relative;
+            font-size: 24px;
+            border-bottom: 1px solid #ededed;
+            transition: background-color 0.3s ease;
+        }
+
+        .todo:hover{
+            background-color: #f9f9f9;
+        }
+
+
+        .view {
+            display: flex;  /* 使用 Flexbox 布局 */
+            align-items: center;  /* 垂直居中 */
+            padding: 15px;
+        }
+
+        .index {
+            width: 40px;
+            text-align: center;
+            color: #999;
+            font-size: 20px;
+        }
+
+        label {
+            flex: 1;  /* 占据剩余空间 */
+            word-break: break-all;
+            line-height: 1.2;
+            padding-left: 10px;
+        }
+
+        /* 红色 × 按钮 */
+        .destroy {
+            width: 30px;
+            height: 30px;
+            border: none;
+            background: none;
+            cursor: pointer;
+            position: relative;
+            margin-left: auto;  /* 靠右对齐 */
+            opacity:0;
+            transition: opacity 0.3s ease;/* 淡入和淡出都是0.3秒 */
+        }
+
+        .destroy::before {
+            content: '×';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            font-size: 24px;
+            color: #ff5b5b;
+            line-height: 30px;  /* 垂直居中 */
+            text-align: center;  /* 水平居中 */
+        }
+
+        /* 鼠标悬停在 todo 上时显示删除按钮 */
+        .todo:hover .destroy {
+            opacity: 1;
+        }
+        /* 鼠标悬停在删除按钮上时变红色 */
+        .destroy:hover::before{
+            color:#ff0000;
+        }
+        /* 底部 */
+        .footer {
+            padding: 10px 15px;
+            text-align: left;
+            color: #777;
+            border-top: 1px solid #ededed;
+        }
+        /* 清除按钮样式 */
+        .clear-completed{
+            border:none;
+            background: none;
+            color: #777777;
+            cursor: pointer;
+            font-size: 14px;
+            padding: 5px 10px;
+            margin: 0;
+        }
+
+        .clear-completed:hover{
+            text-decoration: underline;
+            color: #333;
+        }
+
+    </style>
+</head>
+
+<style>
+
+
+</style>
+
+<body>
+    <section id="todoapp">
+        <!--输入框-->
+        <header class="header">
+            <h1>记事本</h1>
+            <input v-model="inputValue"
+                   @keyup.enter="add"
+                   autofocus="autofocus"
+                   autocomplete="off"
+                   placeholder="请输入任务"
+                   class="new-todo" />
+        </header>
+        <!--列表区域-->
+        <section class="main">
+            <ul class="todo-list" >
+                <li class="todo" v-for="(item,index) in list">
+                    <div class="view">
+                        <span class="index">{{index+1}}</span>
+                        <label>{{item}}</label>
+                        <button class="destroy" @click="remove(index)"></button>
+                    </div>
+                </li>
+            </ul>
+        </section>
+        <!--统计和清空-->
+        <footer class="footer">
+            <span class="todo-count" v-if="list.length!=0">
+                <strong>{{list.length}}</strong>
+                items left
+            </span>
+            <button class="clear-completed" @click="clearall()" v-show="list.length!=0">
+                Clear
+            </button>
+        </footer>
+    </section>
+
+<!--开发环境配置-->
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+    <script>
+        var app = new Vue({
+            el:"#todoapp",
+            data: {
+                inputValue:"好好学习，天天向上",
+                list:["写代码","吃饭","睡觉"]
+            },
+            methods:{
+                add:function (){
+                    this.list.push(this.inputValue);
+                },
+                remove:function (index){
+                    console.log("删除")
+                    console.log(index)
+                    this.list.splice(index,1)
+                },
+                clearall:function (){
+                    this.list=[]
+                }
+            }
+
+        })
+    </script>
+</body>
+</html>
