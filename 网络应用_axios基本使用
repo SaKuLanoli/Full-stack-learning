@@ -1,0 +1,19 @@
+axios:功能强大的网络请求库
+1.导包：<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+2.两种常见的请求方法为例：
+  1）axios.get(地址?查询字符串).then(function(response){},function(err){})
+     axios.get(地址?key=value&key2=value2).then(function(response){},function(err){})
+  2）axios.post(地址,参数对象).then(function(response){},function(err){})
+     axios.post(地址,{key:value,key2:value2}).then(function(response){},function(err){})
+
+准备好的两个接口：
+1.随机获取笑话的接口
+  ·请求地址：https://autumnfish.cn/api/joke/list
+  ·请求方法：get
+  ·请求参数：num
+  ·响应内容：随机笑话
+2.用户在注册接口
+  ·请求地址：https://autumnfish.cn/api/user/reg
+  ·请求方法：post
+  ·请求参数：username
+  ·响应内容：注册成功或失败
