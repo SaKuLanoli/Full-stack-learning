@@ -1,0 +1,59 @@
+五、空间转换
+目标：使用transform属性实现元素在空间内的位移、旋转、缩放等效果
+  ·空间：是从坐标轴角度定义的。x、y和z三条坐标轴构成了一个立体空间，
+        z轴位置与实现方向相同。
+  ·空间转换也叫3D转换
+  ·属性:transform
+1.空间位移
+目标：使用translate属性实现位移效果
+  1）语法：
+    ·transform:tranlate3d(x,y,z);
+    ·transform:translateX(值);
+    ·transform:translateY(值)；
+    ·transform:translateZ(值)；
+  2）取值（正负均可）
+    ·像素单位数值
+    ·百分比
+2.透视
+目标：使用perspective属性实现透视效果
+  1）属性（添加给父级）  
+  ·perspective:值;
+  ·取值：像素单位数值，数值一般在800-1200
+  ·透视距离也称为视距，所谓的视距就是人的眼睛到屏幕的距离
+3.旋转
+目标：使用rotate实现元素空间旋转的效果
+  1)语法：
+    ·transform:rotateZ(值);
+    ·transform:rotateX(值);
+    ·transform:rotateY(值);
+  2）拓展
+    ·rotate3d(x,y,z,角度度数):用来设置自定义旋转轴的位置及旋转的角度
+    ·x,y,z取值为0-1之间的数字
+4.空间变换判断之左手法则
+  左手法则：判断旋转方向：左手握住旋转轴，拇指指向正值方向，手指弯曲方向为旋转正值方向
+5.立体呈现
+目标：使用transform-style:preserve-3d呈现立体图形
+  1）实现方法
+    ·添加transform-style:perserve-3d;
+    ·使子元素处于真正的3d空间
+    ·默认值flat，表示子元素处于2D平面内呈现
+  2）案例——3D导航
+    目标：使用立体呈现技巧实现3D导航效果
+    实现思路:
+    1>搭建立体方块
+      ·li标签
+        -添加立体呈现属性transform-style:preserve-3d;
+        -添加旋转属性（为了便于观察效果案例完成后删除即可）
+      ·a标签
+        调节a标签的位置
+        -a标签定位（子绝父相）
+        -英文部分添加旋转和位移样式
+        -中文部分添加位移样式
+6.空间缩放
+目标：使用scale实现空间缩放效果
+  1）语法
+    ·transform:scaleX(倍数);
+    ·transform:scaleY(倍数);
+    ·transform:scaleZ(倍数);
+    ·transform:scale3d(x,y,z);
+六、动画
