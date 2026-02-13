@@ -74,6 +74,22 @@
 
 
 三、渐变
+目标：使用background-image属性实现渐变背景效果
+  ·渐变式多个颜色逐渐变化的视觉效果
+  ·一般用于设置盒子的背景
+  1）语法：
+          /* 不透明渐变 */
+          background-image:linear-gradient(
+              颜色1,
+              颜色
+          ）;
+
+          /* 半透明渐变 */
+          background-image:linear-gradient(
+              transparent,
+              rgba(x,y,z,w)
+          ）;
+  2)案例-产品展示
 四、综合案例
   1.字体图标：先引入样式图标；调用类名
   2.渐变背景：书写盒子控制位置；hover显示
