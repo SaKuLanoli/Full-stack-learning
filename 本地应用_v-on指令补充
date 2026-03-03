@@ -1,0 +1,63 @@
+1.定义
+传递自定义参数，事件修饰符
+<div id="app">
+        <input type="button" @click="doIt(p1,p2)"> 
+doIt(p1,p2)后面可以跟很多内容
+        <input type="text" @keyup.enter="sayHi">   //@keyup.enter就是监听enter键松开时的触发后面的函数
+    </div>
+var app = new Vue({
+            el:"#app",
+            data:{
+
+            },
+            methods:{
+                doIt:function (p1,p2){},
+                sayHi:function (){}
+            }
+        })
+
+2.特点
+·事件绑定的方法写成函数调用的形式，可以传入自定义参数
+·定义方法时需要定义形参来接收传入的实参
+·事件的后面跟上 ".修饰符" 可以对事件进行限制
+·.enter 可以限制触发的按键为回车
+·事件修饰符有多种
+
+
+
+————————————————————————————————————————————————————————————————————————
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>v-on指令补充</title>
+</head>
+<body>
+    <div id="app">
+        <input type="button" value="点击" @click="doIt(666,'老铁')">
+        <input type="text" @keyup.enter="sayHi">
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script>
+        var app = new Vue({
+            el:"#app",
+            data:{
+
+            },
+            methods:{
+                doIt:function (p1,p2){
+                    console.log("做IT");
+                    console.log(p1);
+                    console.log(p2);
+                },
+                sayHi:function (){
+                    alert("吃了没？");
+                }
+            }
+        })
+    </script>
+</body>
+</html>

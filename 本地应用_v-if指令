@@ -1,0 +1,59 @@
+1.定义
+根具表达式的真假，切换元素的显示和隐藏（操纵dom元素）
+ <div id="app">
+      <p v-if="false">我是一个p标签</p>
+      <p v-if="isShow">我是一个p标签</p>
+     <p v-if="表达式">我是一个p标签</p>
+ </div>
+var app = new Vue({
+     el:"#app",
+     data:{
+        isShow:false
+    }
+})
+
+2.重点
+·v-if的作用和v-show相似，都是根据表达式的真假切换元素的显示状态，但是本质不同
+·通过观察网页检查中的Elements我们可以发现：  v-if的本质是通过操纵dom元素来切换显示状态; v-show的本质注释掉不满足条件的整行
+·表达式的值为true，元素存在于dom树中，为false,从dom树中移除
+·频繁的显示状态切换使用v-show,反之使用v-if,因为v-if操作dom元素，切换消耗大
+
+
+
+________________________________________________________________________________________
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>v-if指令</title>
+</head>
+<body>
+    <div id="app">
+        <input type="button" value="切换显示" @click="toggleIsShow">
+        <p v-if="false">我是一个p标签</p>
+        <p v-if="isShow">我是一个p标签 v-if修饰</p>
+        <p v-show="isShow">我是一个p标签 v-show修饰</p>
+        <h2 v-if="temperature>=35">热死啦</h2>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script>
+        var app = new Vue({
+            el:"#app",
+            data:{
+                isShow:false,
+                temperature:40
+
+            },
+            methods:{
+                toggleIsShow:function (){
+                    this.isShow =! this.isShow;
+                }
+            }
+
+        })
+    </script>
+</body>
+</html>

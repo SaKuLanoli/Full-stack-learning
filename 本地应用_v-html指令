@@ -1,0 +1,55 @@
+1.定义
+设置标签的innerHTML
+
+<div id="app">
+    <p v-html="content"></p>
+</div>
+
+var app = new Vue({
+    el:"#app",
+    data:{
+        content:"Hello Vue!"//对于普通文本，显示和v-text没有差别
+        content:"<a href='#'>黑马程序员</a>"//如果内容中是html结构，则和v-text有差别
+    }
+
+})
+
+2.重点归纳
+·v-html指令的作用是：设置标签的innerHTML
+·内容中有html结构，会被解析成标签
+·v-text指令无论内容是什么都只会解析成文本
+·解析文本使用v-text，需要解析html结构使用v-html
+
+
+
+
+
+________________________________________________________________________________
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>v-html指令</title>
+</head>
+<body>
+    <div id="app">
+        <p v-html="content"></p>
+        <p v-text="content"></p>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script>
+        var app = new Vue({
+            el:"#app",
+            data:{
+                //content:"Hello Vue!"//对于普通文本，显示和v-text没有差别
+                content:"<a href='https://www.itheima.com'>黑马程序员</a>"//如果内容中是html结构，则和v-text有差别
+            }
+
+        })
+    </script>
+
+</body>
+</html>

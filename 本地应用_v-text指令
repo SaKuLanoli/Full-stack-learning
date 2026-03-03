@@ -1,0 +1,44 @@
+1.定义：设置标签文本值（textContent）
+<div id="app">
+  <h2 v-text="message+'!'"> </h2>
+  <h2> 深圳{{message+"!"}} </h2>
+</div>
+
+var app = new Vue({
+  el:"#app",
+  data:{
+    message:"Hello,Vue!"
+  }
+})
+
+2.“默认写法”会替换全部内容，使用“差值表达式{{}}”可以替换制定内容
+3.内部支持写表达式
+——————————————————————————————————————————————————————————————————————————————————————
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>v-text指令</title>
+</head>
+<body>
+<!--最简单的字符串拼接-->
+    <div id="app">
+        <h2 v-text="message+'?'">开心</h2>
+        <h2 v-text="info+'?'">开心</h2>
+        <h2>{{message+'?'}}开心</h2>  //如果要部分替换使用{{}}这种写法
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script>
+        var app = new Vue({
+            el:"#app",
+            data:{
+                message:"Hello,Vue!!!",
+                info:"Study"
+            }
+        })
+    </script>
+</body>
+</html>
